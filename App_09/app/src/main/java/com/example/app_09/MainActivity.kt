@@ -2,12 +2,14 @@ package com.example.app_09
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.inputmethod.InputBinding
 import android.widget.AdapterView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.app_09.databinding.ActivityMainBinding
 import com.example.app_09.RecordAdapter
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -55,10 +58,25 @@ class MainActivity : AppCompatActivity() {
             val hr = data?.getIntExtra("hr", 0) ?: 0
             val newRecord = bprecord(getCurrentDateTime(), sys, dia, hr)
 
+            /*if(records.bprecords == null){
+                records = Bprecords(mutableListOf())
+            }
+
+            val mutableList = records.bprecords.toMutableList()
+            mutableList.add(newRecord)
+            records = Bprecords(mutableList)
+            val userJson = gson.toJson(records)
+
+            with(sharedPreferenced.edit()){
+                puString("user_data", userJson)
+                apply()
+            }*/
+
             mAdapter.addRecord(newRecord)
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getCurrentDateTime(): String{
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")

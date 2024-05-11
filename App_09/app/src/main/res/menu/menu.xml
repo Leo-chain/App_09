@@ -4,7 +4,8 @@
 
     <item
         android:id="@+id/menu_add"
+        android:icon="@drawable/baseline_add_24"
         android:title="add"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_android_24_white"/>
+        app:showAsAction="always" />
+
 </menu>
